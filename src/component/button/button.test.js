@@ -8,7 +8,8 @@ describe('SharedButton Component', () => {
     it('Should NOT throw a warning', () => {
       const expectedProps = {
         buttonText: 'Example Button Text',
-        emitEvent: () => { }
+        emitEvent: () => {
+        }
       };
       const propsError = checkProps(SharedButton, expectedProps);
       expect(propsError).toBeUndefined();

@@ -19,7 +19,7 @@ const initialState = {
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       ...initialState
@@ -27,12 +27,12 @@ class App extends Component {
     this.fetch = this.fetch.bind(this);
   }
 
-  fetch(){
+  fetch() {
     this.props.fetchPosts();
-    this.exampleMethod_updatesState();
+    this.handleButtonClick();
   }
 
-  exampleMethod_updatesState() {
+  handleButtonClick() {
     const { hideBtn } = this.state;
     this.setState({
       hideBtn: !hideBtn
@@ -46,7 +46,6 @@ class App extends Component {
   render() {
     const { posts } = this.props;
     const { hideBtn } = this.state;
-
     const configButton = {
       buttonText: 'Get posts',
       emitEvent: this.fetch
@@ -57,13 +56,15 @@ class App extends Component {
         <Header />
         <section className="main">
           <Headline header="Posts" desc="Click the button to render posts!" tempArr={tempArr} />
-          
+
           {!hideBtn &&
-            <SharedButton {...configButton} />
+            <div data-test="sharedButton">
+              <SharedButton {...configButton} />
+            </div>
           }
-          
+
           {posts.length > 0 &&
-            <div>
+            <div data-test="listItems">
               {posts.map((post, index) => {
                 const { title, body } = post;
                 const configListItem = {
@@ -84,8 +85,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    posts: state.posts
+    posts: state.posts.posts
   }
 }
 
-export default connect(mapStateToProps, {fetchPosts})(App);
+export default connect(mapStateToProps, { fetchPosts })(App);

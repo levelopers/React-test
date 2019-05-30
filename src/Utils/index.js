@@ -1,7 +1,5 @@
 import checkPropTypes from 'check-prop-types'
-import { applyMiddleware, createStore } from 'redux';
 import configureMockStore from 'redux-mock-store'
-import rootReducer from '../redux/reducers';
 import { middlewares } from '../createStore';
 
 export const checkProps = (component, expectedProps) => {
@@ -14,5 +12,5 @@ export const findByTestAtrr = (component, attr) => {
 
 export const testStore = (initialState) => {
   const mockStore = configureMockStore(middlewares)
-  return mockStore(rootReducer, initialState);
+  return mockStore(initialState);
 };
